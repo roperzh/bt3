@@ -17,7 +17,7 @@ var LiveMap = function() {
 
   var setMapHeigth = function() {
     var windowHeight = $(window).height();
-    var mapHeight = windowHeight - 250;
+    var mapHeight = 550;
     var contHeight = windowHeight - mapHeight;
 
     $('#map').css('height', mapHeight);

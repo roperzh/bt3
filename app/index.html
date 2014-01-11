@@ -17,6 +17,7 @@
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/modules/letter_updater.css">
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
         <script src="bower_components/modernizr/modernizr.js"></script>
@@ -35,7 +36,13 @@
           </dl>
         </div>
 
-        <div id="map"></div>
+        <div class="row" id="js-main">
+          <div class="small-2 large-4 columns"></div>
+        </div>
+
+        <div class="row">
+          <div id="map"></div>
+        </div>
 
 
         <!-- build:js scripts/vendor.js -->
@@ -43,6 +50,7 @@
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/foundation/js/foundation.js"></script>
         <script src="bower_components/d3/d3.js"></script>
+        <script src="bower_components/sugar/release/sugar-full.min.js"></script>
         <script src="scripts/vendor/leaflet.js"></script>
         <script src="scripts/vendor/bouncemarker.js"></script>
         <!-- endbower -->
@@ -63,6 +71,7 @@
         <script src="scripts/modules/data_channel.js"></script>
         <script src="scripts/modules/ip_decoder.js"></script>
         <script src="scripts/modules/live_map.js"></script>
+        <script src="scripts/modules/letter_updater.js"></script>
         <script src="scripts/app.js"></script>
         <!-- endbuild -->
 </body>

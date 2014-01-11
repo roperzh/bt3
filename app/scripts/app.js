@@ -15,3 +15,16 @@ blockChain.ws.addEventListener('message', function(e) {
 });
 
 setTimeout(blockChain.start, 3000);
+
+
+$('#js-main').css({
+  'height': ($(window).height()) + 'px'
+});
+$(window).resize(function() {
+  $('#js-main').css({
+    'height': ($(window).height()) + 'px'
+  });
+});
+
+var map = new LiveMap();
+var letter_updater = new LetterUpdater();
