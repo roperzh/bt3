@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 var LetterUpdater = function() {
 
@@ -6,9 +6,9 @@ var LetterUpdater = function() {
   var height = $(window).height();
   var svg;
   var words = [
-    'welcome to the awsomeness',
-    'explore about bitcoins',
-    'lalala'
+    "welcome to the awsomeness",
+    "explore about bitcoins",
+    "lalala"
   ];
 
   var init = function() {
@@ -41,10 +41,10 @@ var LetterUpdater = function() {
         // Check if the data source is fresh
         if (this.dx) {
           oldLetters.push(d);
-          return d + oldLetters.count(d)
+          return d + oldLetters.count(d);
         } else {
           newLetters.push(d);
-          return d + newLetters.count(d)
+          return d + newLetters.count(d);
         }
       });
 
@@ -86,4 +86,4 @@ var LetterUpdater = function() {
   };
 
   return init();
-}
+};

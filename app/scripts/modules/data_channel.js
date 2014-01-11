@@ -1,25 +1,25 @@
-'use strict';
+"use strict";
 
 var DataChannel = function() {
     var ws;
-    var wsUri = 'ws://ws.blockchain.info:8335/inv';
+    var wsUri = "ws://ws.blockchain.info:8335/inv";
 
     var init = function() {
         ws = new WebSocket(wsUri);
         return {
-            'ws': ws,
-            'start': start
+            "ws": ws,
+            "start": start
         };
     };
 
     var dispatchSentEvent = function(data) {
-        var e = new CustomEvent('sentmessage');
+        var e = new CustomEvent("sentmessage");
         e.data = data;
         ws.dispatchEvent(e);
     };
 
     var start = function() {
-        send({'op': 'unconfirmed_sub'});
+        send({"op": "unconfirmed_sub"});
     };
 
     var send = function(message) {

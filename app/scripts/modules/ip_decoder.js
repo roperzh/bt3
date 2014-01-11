@@ -1,7 +1,7 @@
-'use strict'
+"use strict";
 
 var IpDecoder = function() {
-  var geoUri = 'http://freegeoip.net/json/';
+  var geoUri = "http://freegeoip.net/json/";
   var ipQueue = [];
   var ipCache = {};
   var intervalID;
@@ -10,11 +10,11 @@ var IpDecoder = function() {
   var init = function() {
     intervalID = setInterval(unQueue, 1000);
     return {
-      'queue': ipQueue
+      "queue": ipQueue
     };
   };
 
-  var xhrCallback = function(data) {
+  var xhrCallback = function() {
     var data = JSON.parse(this.responseText);
     dispatchGeoEvent(data);
     data.cached = true;
@@ -22,7 +22,7 @@ var IpDecoder = function() {
   };
 
   var dispatchGeoEvent = function(data) {
-    var e = new CustomEvent('geoip');
+    var e = new CustomEvent("geoip");
     e.data = data;
     document.dispatchEvent(e);
   };
@@ -32,7 +32,7 @@ var IpDecoder = function() {
 
     ip = ipQueue.pop();
 
-    if (!ip || ip === '127.0.0.1') {
+    if (!ip || ip === "127.0.0.1") {
       return;
     }
 
@@ -42,7 +42,7 @@ var IpDecoder = function() {
 
     xhr = new XMLHttpRequest();
     xhr.onload = xhrCallback;
-    xhr.open('get', geoUri + ip, true);
+    xhr.open("get", geoUri + ip, true);
     xhr.send();
   };
 
