@@ -27,6 +27,6 @@ $(window).resize(function() {
   });
 });
 
-var map = new LiveMap();
 var letterUpdater = new LetterUpdater();
+var map = new LiveMap();
 
