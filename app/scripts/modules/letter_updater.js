@@ -23,9 +23,9 @@ var LetterUpdater = function() {
   };
 
   var makeSvgArea = function() {
-    svg = d3.select("#js-main").append("svg")
-      .attr("width", width - 50)
-      .attr("height", height - 50)
+    svg = d3.select("#js-messageArea").append("svg")
+      .attr("width", width - 70)
+      .attr("height", height - 130)
       .append("g")
       .attr("transform", "translate(32," + (height / 2) + ")");
   };

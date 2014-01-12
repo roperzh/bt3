@@ -1,0 +1,14 @@
+.box-down {
+  height: 128px;
+
+  font-size: 3em;
+  text-align: center;
+
+  background: $ligth-blue;
+
+  a {
+    color: white;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+  }
+}

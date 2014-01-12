@@ -17,11 +17,9 @@ var LiveMap = function() {
 
   var setMapHeigth = function() {
     var windowHeight = $(window).height();
-    var mapHeight = 550;
-    var contHeight = windowHeight - mapHeight;
+    var mapHeight = $(window).height();
 
     $("#map").css("height", mapHeight);
-    $(".boundaries").css("height", contHeight);
 
     // Always call invalidateSize on map resize
     map.invalidateSize();

@@ -13,11 +13,11 @@
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
         <link rel="stylesheet" type="text/css" href="bower_components/foundation/css/foundation.css">
+        <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.css">
         <link rel="stylesheet" type="text/css" href="styles/vendor/leaflet.css">
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/modules/letter_updater.css">
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
         <script src="bower_components/modernizr/modernizr.js"></script>
@@ -36,12 +36,22 @@
           </dl>
         </div>
 
-        <div class="row" id="js-main">
-          <div class="small-2 large-4 columns"></div>
+        <div class="row js-contentRegion" id="js-main">
+          <div class="row">
+            <div class="small-12 large-12 columns" id="js-messageArea"></div>
+          </div>
+          <div class="row">
+            <div class="enter small-1 small-centered columns box-down">
+              <a href="#map"><i class="fa fa-chevron-down"></i></a>
+            </div>
+          </div>
         </div>
 
-        <div class="row">
-          <div id="map"></div>
+        <div class="row js-contentRegion" name="map">
+          <div class="small-2 large-4 columns">
+            <h2>tst</h2>
+          </div>
+          <div id="map" class="small-10 large-8 columns"></div>
         </div>
 
 
