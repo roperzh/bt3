@@ -48,10 +48,110 @@
         </div>
 
         <div class="row js-contentRegion" name="map">
-          <div class="small-2 large-4 columns">
+          <aside class="small-2 large-4 columns left-menu">
             <h2>tst</h2>
-          </div>
+          </aside>
           <div id="map" class="small-10 large-8 columns"></div>
+        </div>
+
+
+        <div class="row js-contentRegion" name="calc">
+          <aside class="small-6 large-6 columns left-menu">
+            <iframe src="https://localbitcoins.com/iframe/"></iframe>
+          </aside>
+          <aside class="small-6 large-6 columns left-menu">
+            <div id="js-calculator">
+              <table cellpadding="2" cellspacing="0" border="0">
+                <tbody>
+                  <tr>
+                    <td>Difficulty:</td>
+
+                    <td>
+                      <input type="text" name="difficulty" value="1180920000" id="difficulty"size="20" maxlength="50" />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Hashrate:</td>
+
+                    <td>
+                      <input type="text" name="hashrate" value="" id="hashrate" size="20" maxlength="50" /> Mhash/s
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td valign="top">Exchange rate:</td>
+
+                    <td>
+                      <table cellpadding="0" cellspacing="0" border="0" >
+                        <tbody>
+                          <tr>
+                            <td>Bitcoin:</td>
+
+                            <td><input type="text" name="usdbtc" value="856.7" id="usdbtc" size="7" maxlength="10" /> USD</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p>Time to generate one block to earn 50 Bitcoins on solo mining:</p>
+
+              <table cellpadding="2" cellspacing="0" border="0">
+                <tbody>
+                  <tr>
+                    <td>Average time: <span id="nmcblocktime"><em>Please enter the hashrate in the
+                    field above.</em></span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p>Expected earnings:</p>
+
+              <table cellpadding="2" cellspacing="0" border="0" width="300">
+                <tbody>
+                  <tr>
+                    <th></th>
+
+                    <th>Bitcoins</th>
+
+                    <th>Dollars</th>
+                  </tr>
+
+                  <tr>
+                    <td>Per day:</td>
+
+                    <td>B<span id="btcperday">0.0</span></td>
+
+                    <td>$<span id="usdperday">0.0</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>Per week:</td>
+
+                    <td>B<span id="btcperweek">0.0</span></td>
+
+                    <td>$<span id="usdperweek">0.0</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>Per month:</td>
+
+                    <td>B<span id="btcpermonth">0.0</span></td>
+
+                    <td>$<span id="usdpermonth">0.0</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </aside>
+        </div>
+
+        <div class="row js-contentRegion">
+        <div class="small-12 columns test" name="test" id="test"></div>
         </div>
 
 
@@ -82,6 +182,8 @@
         <script src="scripts/modules/ip_decoder.js"></script>
         <script src="scripts/modules/live_map.js"></script>
         <script src="scripts/modules/letter_updater.js"></script>
+        <script src="scripts/modules/calculator.js"></script>
+        <script src="scripts/modules/test.js"></script>
         <script src="scripts/app.js"></script>
         <!-- endbuild -->
 </body>

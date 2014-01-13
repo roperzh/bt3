@@ -17,7 +17,6 @@ blockChain.ws.addEventListener("message", function(e) {
 
 setTimeout(blockChain.start, 3000);
 
-
 $(".js-contentRegion").css({
   "height": ($(window).height()) + "px"
 });
@@ -29,4 +28,7 @@ $(window).resize(function() {
 
 var letterUpdater = new LetterUpdater();
 var map = new LiveMap();
+var calc = new Calculator(1180920000);
+var test = new Test(223300861.7188927);
+//--------------------------------------
 

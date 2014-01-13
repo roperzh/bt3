@@ -12,7 +12,7 @@
     "noarg": true,
     "unused": false,
     "undef": false,
-    "quotmark": "double",
+    "quotmark": false,
     "trailing": true,
     "smarttabs": false,
     "jquery": true

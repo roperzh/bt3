@@ -1,10 +1,10 @@
 .box-down {
-  height: 128px;
+  height: 130px;
 
   font-size: 3em;
   text-align: center;
 
-  background: $ligth-blue;
+  background: $base-contrast;
 
   a {
     color: white;
@@ -12,3 +12,9 @@
     vertical-align: -webkit-baseline-middle;
   }
 }
+
+
+.left-menu {
+  height: 100%;
+}
+
