@@ -5,10 +5,12 @@ var LetterUpdater = function() {
   var width = $(window).width();
   var height = $(window).height();
   var svg;
+  var currentTextIndex = 0;
   var words = [
-    "welcome to the awsomeness",
-    "explore about bitcoins",
-    "lalala"
+    "Think about...",
+    "real time visualizations...",
+    "open data...",
+    "D3 + Modular JS",
   ];
 
   var init = function() {
@@ -17,17 +19,28 @@ var LetterUpdater = function() {
 
     // Grab a random sample of letters from the alphabet, in alphabetical order.
     setInterval(function() {
-      update(words[Math.round(Math.random() * 2)].split(""));
-    }, 1500);
+      update(getCurrentText().split(""));
+    }, 2500);
 
   };
+
+  var getCurrentText = function() {
+    currentTextIndex++;
+    var response = words[currentTextIndex];
+    if(response) {
+      return response;
+    } else {
+      currentTextIndex = 0;
+      return words[0];
+    }
+  }
 
   var makeSvgArea = function() {
     svg = d3.select("#js-messageArea").append("svg")
       .attr("width", width - 70)
       .attr("height", height - 130)
       .append("g")
-      .attr("transform", "translate(32," + (height / 2) + ")");
+      .attr("transform", "translate(" + (width / 4) + "," + (height / 2.5) + ")");
   };
 
   var update = function(data) {
@@ -54,7 +67,7 @@ var LetterUpdater = function() {
       .transition()
       .duration(750)
       .attr("x", function(d, i) {
-        return i * 32;
+        return i * 40;
       });
 
     // ENTER
@@ -64,7 +77,7 @@ var LetterUpdater = function() {
       .attr("dy", ".35em")
       .attr("y", -60)
       .attr("x", function(d, i) {
-        return i * 32;
+        return i * 40;
       })
       .style("fill-opacity", 1e-6)
       .text(function(d) {

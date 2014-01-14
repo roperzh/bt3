@@ -31,7 +31,7 @@ $(window).resize(function() {
   });
 });
 
-// var letterUpdater = new LetterUpdater();
+var letterUpdater = new LetterUpdater();
 // var map = new LiveMap();
 // var calc = new Calculator(1180920000);
 // var energyStatistics = new StatisticsManager(223300861.7188927);
