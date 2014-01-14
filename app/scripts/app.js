@@ -1,4 +1,8 @@
 $(document).foundation();
+App = {};
+App.width = $(window).width();
+App.height = $(window).height();
+
 // blockChain = new DataChannel();
 // geoIP = new IpDecoder();
 
@@ -15,20 +19,21 @@ $(document).foundation();
 //   }
 // });
 
-setTimeout(blockChain.start, 3000);
+// setTimeout(blockChain.start, 3000);
 
 $(".js-contentRegion").css({
-  "height": ($(window).height()) + "px"
+  "height": (App.height) + "px"
 });
+
 $(window).resize(function() {
   $(".js-contentRegion").css({
-    "height": ($(window).height()) + "px"
+    "height": (App.height) + "px"
   });
 });
 
 // var letterUpdater = new LetterUpdater();
 // var map = new LiveMap();
 // var calc = new Calculator(1180920000);
-var test = new Test(223300861.7188927);
+// var energyStatistics = new StatisticsManager(223300861.7188927);
 //--------------------------------------
 

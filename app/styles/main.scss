@@ -27,3 +27,11 @@
 .row  {
   max-width: 97%;
 }
+
+.active {
+  fill: $base-contrast;
+}
+
+.clicked {
+  fill: $base-contrast-dark;
+}
