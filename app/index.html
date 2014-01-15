@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="bower_components/foundation/css/foundation.css">
         <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.css">
         <link rel="stylesheet" type="text/css" href="styles/vendor/leaflet.css">
+        <link rel="stylesheet" type="text/css" href="styles/vendor/leaflet_custom_markers.css">
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
@@ -42,7 +43,7 @@
             <div class="small-12 large-12 columns" id="js-messageArea"></div>
           </div>
           <div class="row">
-            <div class="enter small-1 small-centered columns box-down">
+            <div class="enter small-1 small-centered columns box-down" id="mapBtn">
               <a href="#map"><i class="fa fa-chevron-down"></i></a>
             </div>
           </div>
@@ -50,7 +51,17 @@
 
         <div class="row js-contentRegion" name="map">
           <aside class="small-2 large-4 columns left-menu">
-            <h2>tst</h2>
+            <header>
+              <h2>Realtime Map</h2>
+            </header>
+            <p>The map shows the current bitcoins transactions in the world, geolocated and Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <strong>Click on the markers for more info about the transactions</strong>
+
           </aside>
           <div id="map" class="small-10 large-8 columns"></div>
         </div>
@@ -58,7 +69,7 @@
 
         <div class="row js-contentRegion" name="calc">
           <aside class="small-6 large-6 columns left-menu">
-            <iframe src="https://localbitcoins.com/iframe/"></iframe>
+            <!-- <iframe src="https://localbitcoins.com/iframe/"></iframe> -->
           </aside>
           <aside class="small-6 large-6 columns left-menu">
             <div id="js-calculator">
@@ -164,6 +175,8 @@
         <script src="bower_components/sugar/release/sugar-full.min.js"></script>
         <script src="scripts/vendor/leaflet.js"></script>
         <script src="scripts/vendor/bouncemarker.js"></script>
+        <script src="scripts/vendor/scroller.js"></script>
+        <script src="scripts/vendor/leaflet_custom_markers.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
