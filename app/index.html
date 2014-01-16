@@ -14,6 +14,7 @@
         <!-- bower:css -->
         <link rel="stylesheet" type="text/css" href="bower_components/foundation/css/foundation.css">
         <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="bower_components/nouislider/jquery.nouislider.css">
         <link rel="stylesheet" type="text/css" href="styles/vendor/leaflet.css">
         <link rel="stylesheet" type="text/css" href="styles/vendor/leaflet_custom_markers.css">
         <!-- endbower -->
@@ -50,7 +51,7 @@
         </div>
 
         <div class="row js-contentRegion" name="map">
-          <aside class="small-2 large-4 columns left-menu">
+          <aside class="small-2 large-4 columns left-menu full-height">
             <header>
               <h2>Realtime Map</h2>
             </header>
@@ -68,60 +69,21 @@
 
 
         <div class="row js-contentRegion" name="calc">
-          <aside class="small-6 large-6 columns left-menu">
-            <!-- <iframe src="https://localbitcoins.com/iframe/"></iframe> -->
+          <aside class="small-6 large-6 columns full-height tested">
+
           </aside>
-          <aside class="small-6 large-6 columns left-menu">
+          <aside class="small-6 large-6 columns full-height">
             <div id="js-calculator">
-              <table cellpadding="2" cellspacing="0" border="0">
-                <tbody>
-                  <tr>
-                    <td>Difficulty:</td>
-
-                    <td>
-                      <input type="text" name="difficulty" value="1180920000" id="difficulty"size="20" maxlength="50" />
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>Hashrate:</td>
-
-                    <td>
-                      <input type="text" name="hashrate" value="" id="hashrate" size="20" maxlength="50" /> Mhash/s
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td valign="top">Exchange rate:</td>
-
-                    <td>
-                      <table cellpadding="0" cellspacing="0" border="0" >
-                        <tbody>
-                          <tr>
-                            <td>Bitcoin:</td>
-
-                            <td><input type="text" name="usdbtc" value="856.7" id="usdbtc" size="7" maxlength="10" /> USD</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <p>Time to generate one block to earn 50 Bitcoins on solo mining:</p>
-
-              <table cellpadding="2" cellspacing="0" border="0">
-                <tbody>
-                  <tr>
-                    <td>Average time: <span id="nmcblocktime"><em>Please enter the hashrate in the
-                    field above.</em></span></td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <p>Expected earnings:</p>
-
+              <form>
+                <p>Difficulty: <span id="js-difficulty">1180920000</span></p>
+                <div id="js-hashRate">
+                  <p>Hashrate: <span id="js-currentHashRate">5500</span> Mhash/s</p>
+                  <div class="slider"></div>
+                </div>
+                <p>Time to generate one block to earn 50 Bitcoins on solo mining:</p>
+                <p>Average time: <span id="nmcblocktime"><em>Please enter the hashrate in the field above.</em></span></p>
+                <p>Expected earnings:</p>
+              </form>
               <table cellpadding="2" cellspacing="0" border="0" width="300">
                 <tbody>
                   <tr>
@@ -172,6 +134,7 @@
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/foundation/js/foundation.js"></script>
         <script src="bower_components/d3/d3.js"></script>
+        <script src="bower_components/nouislider/jquery.nouislider.js"></script>
         <script src="bower_components/sugar/release/sugar-full.min.js"></script>
         <script src="scripts/vendor/leaflet.js"></script>
         <script src="scripts/vendor/bouncemarker.js"></script>

@@ -1,19 +1,30 @@
 'use strict';
 
-var Calculator = function(difficulty) {
+var Calculator = function(difficulty, exangeRate) {
   var self = this;
-  $('#js-calculator').find("input").on("keyup", function() {
-    self.calc();
-  });
+
+  $('#js-difficulty').html(difficulty);
+
+  $('.slider').noUiSlider({
+   range: [0,99999],
+   start: 5500,
+   handles: 1,
+   connect: "lower",
+   serialization: {
+    resolution: 1
+  },
+  slide: function() {
+    var hasrate = this.val();
+    $("#js-currentHashRate").html(hasrate);
+    self.calc(hasrate);
+  }
+});
 
   var init = function() {
     return this.calc();
   };
 
-  this.calc = function () {
-    var hashRate = $('#hashrate').val();
-    var exangeRate = $('#usdbtc').val();
-
+  this.calc = function (hashRate) {
     $('#nmcblocktime').text(
       avgTime(hashRate, difficulty)
     );

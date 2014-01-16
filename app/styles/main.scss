@@ -40,3 +40,8 @@
 .clicked {
   fill: $base-contrast-dark;
 }
+
+path {
+  stroke: #fff;
+  fill-rule: evenodd;
+}
