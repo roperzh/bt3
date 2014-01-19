@@ -5,7 +5,7 @@ var LiveMap = function() {
 
   var redMarker = L.AwesomeMarkers.icon({
     icon: 'bitcoin',
-    markerColor: 'red'
+    markerColor: 'blue'
   });
 
 

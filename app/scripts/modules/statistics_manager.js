@@ -54,13 +54,13 @@ var StatisticsManager = function(wattsWasted) {
   var getSymbolFor = function(type) {
     switch (type) {
       case "home":
-        return '\uf015';
+        return "a";
       case "lamp":
-        return '\uf0eb';
+        return 'b';
       case "mobile":
-        return '\uf10b';
+        return 'c';
       case "desktop":
-        return '\uf108';
+        return 'd';
     }
   };
 

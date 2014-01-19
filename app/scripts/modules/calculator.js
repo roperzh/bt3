@@ -1,53 +1,59 @@
 'use strict';
 
-var Calculator = function(difficulty, exangeRate) {
+var Calculator = function(difficulty, exangeRate, scope) {
   var self = this;
+  var wattFactor = 0.633333;
 
   $('#js-difficulty').html(difficulty);
 
   $('.slider').noUiSlider({
-   range: [0,99999],
-   start: 5500,
+   range: [0,4500],
+   start: 400,
    handles: 1,
    connect: "lower",
+   color: "red",
    serialization: {
     resolution: 1
   },
   slide: function() {
-    var hasrate = this.val();
-    $("#js-currentHashRate").html(hasrate);
-    self.calc(hasrate);
+    var hashrate = scaleRate(this.val());
+    self.calc(hashrate);
   }
 });
 
   var init = function() {
-    return this.calc();
+    self.calc(400);
   };
 
   this.calc = function (hashRate) {
-    $('#nmcblocktime').text(
-      avgTime(hashRate, difficulty)
-    );
+    $("#js-currentHashRate").html(hashRate);
+    var timeData = avgTime(hashRate, difficulty);
+    var moneyData = getMoneyData(hashRate, difficulty);
+    var eventData = Object.merge(timeData, moneyData);
+    scope.dispatchEvent(eventData);
+  };
 
-    $('#btcperday').text(
-      earnBTC(hashRate, difficulty, 1)
-    );
-    $('#btcperweek').text(
-      earnBTC(hashRate, difficulty, 7)
-    );
-    $('#btcpermonth').text(
-      earnBTC(hashRate, difficulty, 30)
-    );
+  var getMoneyData = function(hashRate, difficulty) {
+    return {
+        type: "rate",
+        btcPerDay: earnBTC(hashRate, difficulty, 1),
+        usdPerDay: earnUSD(hashRate, difficulty, exangeRate, 1),
+        cost: calculateCost(hashRate),
+      }
+  };
 
-    $('#usdperday').text(
-      earnUSD(hashRate, difficulty, exangeRate, 1)
-    );
-    $('#usdperweek').text(
-      earnUSD(hashRate, difficulty, exangeRate, 7)
-    );
-    $('#usdpermonth').text(
-      earnUSD(hashRate, difficulty, exangeRate, 30)
-    );
+  var scaleRate = function(hashrate) {
+    if (hashrate < 1500) {
+      return hashrate;
+    } else if (hashrate < 3000) {
+      return hashrate * 6;
+    } else {
+      return hashrate * 20;
+    }
+  };
+
+  var calculateCost = function(hashrate) {
+    return (1/earnUSD(hashrate, difficulty, exangeRate, 1) *  2.64);
   };
 
   var avgTime = function(hashRate, difficulty) {
@@ -61,7 +67,7 @@ var Calculator = function(difficulty, exangeRate) {
 
     var earn = 50 / (result / (days * 24) / 60 / 60);
 
-    return roundNumber(earn, 2);
+    return earn;
   };
 
   var earnUSD = function(hashrate, difficulty, exangeRate, days) {
@@ -69,7 +75,7 @@ var Calculator = function(difficulty, exangeRate) {
 
     var earn = btc * exangeRate;
 
-    return roundNumber(earn, 2);
+    return earn
   };
 
   var roundNumber = function (number, digits) {
@@ -91,25 +97,15 @@ var Calculator = function(difficulty, exangeRate) {
     var s = Math.floor(o % 3600 % 60);
     var r = '';
 
-    if (d > 0) {
-      r += (d > 1 ? d + ' days' : d + ' day') + ', ';
-    }
-    if (h > 0) {
-      r += (h > 1 ? h + ' hours' : h + ' hour') + ', ';
-    }
-    if (m > 0) {
-      r += (m > 1 ? m + ' minutes' : m + ' minute') + ', ';
-    }
-    if (s > 0) {
-      r += (s > 1 ? s + ' seconds' : s + ' second') + ', ';
-    }
-
-    if (r.substring(r.length - 2) === ', ') {
-      r = r.substring(0, r.length - 2);
-    }
-
-    return r;
+    return {
+      days: d,
+      hours: h,
+      minutes: m,
+      seconds: s
+    };
   };
+
+  return init();
 };
 
 

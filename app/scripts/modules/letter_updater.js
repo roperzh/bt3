@@ -1,9 +1,10 @@
 "use strict";
 
-var LetterUpdater = function() {
+var LetterUpdater = function(scope) {
+  var margin = { top: 10, right: 10, bottom: 120, left: 10 };
+  var width = scope.width - margin.left - margin.right;
+  var height = scope.height - margin.top - margin.bottom;
 
-  var width = $(window).width();
-  var height = $(window).height();
   var svg;
   var currentTextIndex = 0;
   var words = [
@@ -37,15 +38,18 @@ var LetterUpdater = function() {
 
   var makeSvgArea = function() {
     svg = d3.select("#js-messageArea").append("svg")
-      .attr("width", width - 70)
-      .attr("height", height - 130)
+      .attr("width", width)
+      .attr("height", height)
       .append("g")
-      .attr("transform", "translate(" + (width / 4) + "," + (height / 2.5) + ")");
+      .attr("transform", "translate(" + (width / 4) + "," + (height / 2) + ")");
   };
 
   var update = function(data) {
     var newLetters = [];
     var oldLetters = [];
+    var fontSize = width * 0.0647;
+    var letterSeparation = fontSize / 2;
+    var svgPosition = currentTextIndex === 1 ? width / data.length : width / 4;
 
     // DATA JOIN
     // Join new data with old elements, if any.
@@ -61,13 +65,17 @@ var LetterUpdater = function() {
         }
       });
 
+    svg.transition()
+      .duration(750)
+      .attr("transform", "translate(" + svgPosition + "," + (height / 2.5) + ")");
+
     // UPDATE
     // Update old elements as needed.
     text.attr("class", "update")
       .transition()
       .duration(750)
       .attr("x", function(d, i) {
-        return i * 40;
+        return i * letterSeparation;
       });
 
     // ENTER
@@ -77,8 +85,9 @@ var LetterUpdater = function() {
       .attr("dy", ".35em")
       .attr("y", -60)
       .attr("x", function(d, i) {
-        return i * 40;
+        return i * letterSeparation;
       })
+      .attr("font-size", fontSize)
       .style("fill-opacity", 1e-6)
       .text(function(d) {
         return d;

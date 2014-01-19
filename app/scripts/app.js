@@ -1,41 +1,61 @@
-$(document).foundation();
-App = {};
-App.width = $(window).width();
-App.height = $(window).height();
+App = function () {
+  var self = this;
 
-// blockChain = new DataChannel();
-// geoIP = new IpDecoder();
+  self.width = $(window).width();
+  self.height = $(window).height();
 
-// blockChain.ws.addEventListener("message", function(e) {
-//   var ip;
-//   var message;
-//   var data = JSON.parse(e.data);
-//   var value = 0.00;
-//   var i;
-//   if (data["x"] && data["x"]["relayed_by"] && data["x"]["out"]) {
-//     ip = data["x"]["relayed_by"];
-//     geoIP.queue.push(ip);
-//   }
-// });
+  var init = function() {
+    EventDispatcher.prototype.apply( App.prototype );
 
-// setTimeout(blockChain.start, 3000);
-// var letterUpdater = new LetterUpdater();
-// var map = new LiveMap();
-// var calc = new Calculator(1789546951, 836.936);
-// var energyStatistics = new StatisticsManager(223300861.7188927);
+    var bulletChart = new BulletChart(self);
+    var clock = new PolarClock(self);
+    var calc = new Calculator(1789546951, 836.936, self);
+    var blockChain = new DataChannel();
+    var geoIP = new IpDecoder();
+    var letterUpdater = new LetterUpdater(self);
+    var map = new LiveMap();
+    // var energyStatistics = new StatisticsManager(223300861.7188927);
 
-var pieChart = new PieChart("body");
+    $(document).foundation();
 
-$(".js-contentRegion").css({
-  "height": (App.height) + "px"
-});
+    $(".js-contentRegion").css({
+      "height": (self.height) + "px"
+    });
 
-$(window).resize(function() {
-  $(".js-contentRegion").css({
-    "height": (App.height) + "px"
-  });
-});
+    $(window).resize(function() {
+      $(".js-contentRegion").css({
+        "height": (self.height) + "px"
+      });
+    });
+
+    $("[id*='Btn']").stop(true).on('click', function(e) {
+      e.preventDefault();
+      $(this).scrolld();
+    });
+
+    blockChain.ws.addEventListener("message", function(e) {
+      var ip;
+      var message;
+      var data = JSON.parse(e.data);
+      var value = 0.00;
+      var i;
+      if (data["x"] && data["x"]["relayed_by"] && data["x"]["out"]) {
+        ip = data["x"]["relayed_by"];
+        geoIP.queue.push(ip);
+      }
+    });
+
+    setTimeout(blockChain.start, 3000);
+  };
+
+  return init();
+};
+
+app = new App();
 
 
-$("[id*='Btn']").stop(true).on('click',function(e){e.preventDefault();$(this).scrolld();});
+// var pieChart = new PieChart("body");
+
+
 //**************************************
+

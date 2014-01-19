@@ -23,7 +23,6 @@
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
         <script src="bower_components/modernizr/modernizr.js"></script>
-        <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:700' rel='stylesheet' type='text/css'>
 
     </head>
     <body>
@@ -31,11 +30,14 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-
         <div data-magellan-expedition="fixed">
           <dl class="sub-nav">
-            <dd data-magellan-arrival="build"><a href="#build">Build with HTML</a></dd>
-            <dd data-magellan-arrival="js"><a href="#js">Arrival 2</a></dd>
+            <dd data-magellan-arrival="js"><a href="#js">BT3</a></dd>
+            <dd data-magellan-arrival="map"><a href="#map" id="mapAreaBtn">Map</a></dd>
+            <dd data-magellan-arrival="calc"><a href="#calc" id="calcBtn">Calculator</a></dd>
+            <dd data-magellan-arrival="js"><a href="#js">Buy BTC</a></dd>
+            <dd data-magellan-arrival="js"><a href="#js">Energy Statistics</a></dd>
+            <dd data-magellan-arrival="build" class="text-right"><a href="#build">View on <i class="fa fa-github"></i></a></dd>
           </dl>
         </div>
 
@@ -44,13 +46,15 @@
             <div class="small-12 large-12 columns" id="js-messageArea"></div>
           </div>
           <div class="row">
-            <div class="enter small-1 small-centered columns box-down" id="mapBtn">
+            <div class="enter small-1 small-centered columns box-down" id="mapAreaBtn">
               <a href="#map"><i class="fa fa-chevron-down"></i></a>
             </div>
           </div>
         </div>
 
-        <div class="row js-contentRegion" name="map">
+        <div class="row js-contentRegion" id="mapArea">
+          <a name="map"></a>
+          <h3 data-magellan-destination="map"></h3>
           <aside class="small-2 large-4 columns left-menu full-height">
             <header>
               <h2>Realtime Map</h2>
@@ -68,60 +72,30 @@
         </div>
 
 
-        <div class="row js-contentRegion" name="calc">
-          <aside class="small-6 large-6 columns full-height tested">
-
-          </aside>
-          <aside class="small-6 large-6 columns full-height">
+        <div class="row js-contentRegion" name="calc" id="calc">
+          <header class="section-header">
+            <a name="calc"></a>
+            <h3 data-magellan-destination="calc">Calculator</h3>
+          </header>
+          <section class="small-6 large-6 columns centered">
+            <div id="js-bulletChart"></div>
+          </section>
+          <section class="small-6 large-6 columns top">
             <div id="js-calculator">
               <form>
-                <p>Difficulty: <span id="js-difficulty">1180920000</span></p>
+                <p><strong>Current difficulty:</strong><span id="js-difficulty">1180920000</span></p>
                 <div id="js-hashRate">
-                  <p>Hashrate: <span id="js-currentHashRate">5500</span> Mhash/s</p>
+                  <p><strong>Hashrate:</strong> <span id="js-currentHashRate">5500</span> Mhash/s</p>
                   <div class="slider"></div>
                 </div>
-                <p>Time to generate one block to earn 50 Bitcoins on solo mining:</p>
+                <div id="js-timer">
+                  <p>Time to generate one block to earn 50 Bitcoins on solo mining:</p>
+                </div>
                 <p>Average time: <span id="nmcblocktime"><em>Please enter the hashrate in the field above.</em></span></p>
-                <p>Expected earnings:</p>
               </form>
-              <table cellpadding="2" cellspacing="0" border="0" width="300">
-                <tbody>
-                  <tr>
-                    <th></th>
-
-                    <th>Bitcoins</th>
-
-                    <th>Dollars</th>
-                  </tr>
-
-                  <tr>
-                    <td>Per day:</td>
-
-                    <td>B<span id="btcperday">0.0</span></td>
-
-                    <td>$<span id="usdperday">0.0</span></td>
-                  </tr>
-
-                  <tr>
-                    <td>Per week:</td>
-
-                    <td>B<span id="btcperweek">0.0</span></td>
-
-                    <td>$<span id="usdperweek">0.0</span></td>
-                  </tr>
-
-                  <tr>
-                    <td>Per month:</td>
-
-                    <td>B<span id="btcpermonth">0.0</span></td>
-
-                    <td>$<span id="usdpermonth">0.0</span></td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
 
-          </aside>
+          </section>
         </div>
 
         <div class="row js-contentRegion">
@@ -140,6 +114,8 @@
         <script src="scripts/vendor/bouncemarker.js"></script>
         <script src="scripts/vendor/scroller.js"></script>
         <script src="scripts/vendor/leaflet_custom_markers.js"></script>
+        <script src="scripts/vendor/d3.bullet_chart.js"></script>
+        <script src="scripts/vendor/event_dispacher.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -162,6 +138,8 @@
         <script src="scripts/modules/calculator.js"></script>
         <script src="scripts/modules/statistics_manager.js"></script>
         <script src="scripts/modules/pie_chart.js"></script>
+        <script src="scripts/modules/bullet_chart.js"></script>
+        <script src="scripts/modules/polar_clock.js"></script>
         <script src="scripts/app.js"></script>
         <!-- endbuild -->
 </body>

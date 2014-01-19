@@ -18,12 +18,16 @@
 @import "base/base";
 
 // -------------------------------------
+//   Temporary styles
+// -------------------------------------
+@import "layouts/layouts";
+
+// -------------------------------------
 //   Modules
 // -------------------------------------
 
 @import "modules/letter_updater";
 @import "modules/boxes";
-
 
 // -------------------------------------
 //   Temporary styles
@@ -45,3 +49,17 @@ path {
   stroke: #fff;
   fill-rule: evenodd;
 }
+
+.slider {
+  background: $base;
+}
+
+.bullet { font: 10px sans-serif; }
+.bullet .marker { stroke: #000; stroke-width: 2px; }
+.bullet .tick line { stroke: #666; stroke-width: .5px; font-size: 10px; }
+.bullet .range.s0 { fill: #eee; }
+.bullet .range.s1 { fill: #ddd; }
+.bullet .range.s2 { fill: #ccc; }
+.bullet .measure.s0 { fill: $base-contrast; }
+.bullet .title { font-size: 14px; font-weight: bold; }
+.bullet .subtitle { fill: #999; font-size: 10px; }
