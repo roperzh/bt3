@@ -4,7 +4,7 @@
   font-size: 3em;
   text-align: center;
 
-  background: $base-contrast;
+  background: $base-contrast-dark;
 
   a {
     color: white;
@@ -14,8 +14,22 @@
 }
 
 
-.left-menu {
-  background: $base;
+.content-menu {
+  background: $base-contrast-dark;
+  padding: 45px;
+  color: white;
+}
+
+.content-box {
+  position: relative;
+  border-top: 1px solid;
+  padding: 15px;
+
+  header {
+    position: absolute;
+    top: -49px;
+    border-bottom: 3px solid;
+  }
 }
 
 .full-height {

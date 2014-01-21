@@ -3,7 +3,7 @@
 var BulletChart = function(scope) {
   var self = this;
 
-  var margin = {top: 5, right: 40, bottom: 20, left: 120},
+  var margin = {top: 5, right: 140, bottom: 20, left: 50},
       width = 500 - margin.left - margin.right,
       height = 60 - margin.top - margin.bottom;
 

@@ -14,13 +14,15 @@
 //   Base
 // -------------------------------------
 
-@import "base/colors";
 @import "base/base";
+@import "themes/colors";
 
 // -------------------------------------
-//   Temporary styles
+//   Layouts
 // -------------------------------------
+
 @import "layouts/layouts";
+@import "layouts/calculator";
 
 // -------------------------------------
 //   Modules
@@ -28,6 +30,13 @@
 
 @import "modules/letter_updater";
 @import "modules/boxes";
+@import "modules/map";
+
+// -------------------------------------
+//   Themes
+// -------------------------------------
+
+@import "themes/basic_theme";
 
 // -------------------------------------
 //   Temporary styles
@@ -35,6 +44,10 @@
 
 .row  {
   max-width: 97%;
+}
+
+.teste {
+  display: none;
 }
 
 .active {

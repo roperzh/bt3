@@ -1,11 +1,11 @@
 "use strict";
 
 var LiveMap = function() {
-  var map = L.map("map").setView([42.617791, -15.306702], 3);
+  var map = L.map("map").setView([42.617791, -15.306702], 3, { zoomControl:false });
 
   var redMarker = L.AwesomeMarkers.icon({
     icon: 'bitcoin',
-    markerColor: 'blue'
+    markerColor: 'orange'
   });
 
 

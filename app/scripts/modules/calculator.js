@@ -7,7 +7,7 @@ var Calculator = function(difficulty, exangeRate, scope) {
   $('#js-difficulty').html(difficulty);
 
   $('.slider').noUiSlider({
-   range: [0,4500],
+   range: [1,4500],
    start: 400,
    handles: 1,
    connect: "lower",

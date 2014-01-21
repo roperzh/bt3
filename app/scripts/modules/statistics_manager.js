@@ -1,14 +1,15 @@
 "use strict";
 
-var StatisticsManager = function(wattsWasted) {
+var StatisticsManager = function(wattsWasted, el, scope) {
 
-  var width = $(window).width() - 150;
-  var height = $(window).height();
+  var width = scope.width - 150;
+  var height = scope.height - 350;
   var svg;
   var maxItems = Math.floor(width / 70);
   var cases = ["home", "lamp", "mobile", "desktop"];
   var currentCase = 0;
   var refreshInterval;
+
   var wattConsumption = {
     home: 18000,
     lamp: 1440,
@@ -16,16 +17,32 @@ var StatisticsManager = function(wattsWasted) {
     mobile: 72,
   };
 
-  var getCurrentCase = function(nextOrPrev) {
-    if(nextOrPrev === "next"){
-      currentCase++;
-    } else {
-      currentCase--;
-    }
+  var ranges = {
+    home: Math.ceil(wattsWasted / wattConsumption["home"]) / 10000,
+    lamp: Math.ceil(wattsWasted / wattConsumption["lamp"]) / 10000,
+    desktop: Math.ceil(wattsWasted / wattConsumption["desktop"]) / 10000,
+    mobile: Math.ceil(wattsWasted / wattConsumption["mobile"]) / 10000
+  };
 
-    var result = cases[currentCase];
-    if(result){
-      return result;
+  var drawableRanges = {
+    home: ranges["home"].toString().split(""),
+    lamp: ranges["lamp"].toString().split(""),
+    desktop: ranges["desktop"].toString().split(""),
+    mobile: ranges["mobile"].toString().split("")
+  };
+
+  var numericRanges = {
+    home: Number.range(0, ranges["home"]).every(),
+    lamp: Number.range(0, ranges["lamp"]).every(),
+    desktop: Number.range(0, ranges["desktop"]).every(),
+    mobile: Number.range(0, ranges["mobile"]).every()
+  };
+
+  var getNextCase = function() {
+    var nextCase = cases[currentCase++];
+
+    if(nextCase){
+      return nextCase;
     } else {
       currentCase = 0;
       return cases[0];
@@ -34,96 +51,46 @@ var StatisticsManager = function(wattsWasted) {
 
   var init = function() {
     makeSvgArea();
-    makeButtons();
-    redraw("home");
-    refreshInterval = setInterval(function() {
-      var c = getCurrentCase("next");
-      redraw(c);
-    }, 5000);
-  };
-
-  var redraw = function(type) {
-    var range = Math.ceil(wattsWasted / wattConsumption[type]) / 1000;
-    var drawableRange = range.toString().split("");
-    var numericRange = Number.range(0, range).every();
-
-    drawNumbers(drawableRange);
-    update(numericRange, getSymbolFor(type));
-  };
-
-  var getSymbolFor = function(type) {
-    switch (type) {
-      case "home":
-        return "a";
-      case "lamp":
-        return 'b';
-      case "mobile":
-        return 'c';
-      case "desktop":
-        return 'd';
-    }
+    showStatsFor("home");
+    initStatsCicle();
   };
 
   var makeSvgArea = function() {
-    svg = d3.select(".test").append("svg")
+    svg = d3.select(el).append("svg")
       .attr("width", width - 70)
       .attr("height", height - 130)
       .append("g")
       .attr("transform", "translate(32," + (height / 2) + ")");
   };
 
-  var makeButtons = function() {
-    var buttonsContainer = svg.append("g")
-      .attr("class", "buttonsGroup");
-
-    buttonsContainer.append("text")
-      .attr("font-family", "FontAwesome")
-      .text("\uf137")
-      .attr("x", function() {
-        return width - 200;
-      })
-      .attr("y", 200)
-      .attr("class", "prevButton")
-      .on("click", showPrev)
-      .on("mouseover", function() {
-        $(this).attr("class", "active");
-      })
-      .on("mouseout", function() {
-        $(this).attr("class", "prevButton");
-      });
-
-    buttonsContainer.append("text")
-      .attr("font-family", "FontAwesome")
-      .text("\uf138")
-      .attr("x", function() {
-        return width - 150;
-      })
-      .attr("y", 200)
-      .attr("class", "nextButton")
-      .on("click", showNext)
-      .on("mouseover", function() {
-        $(this).attr("class", "active");
-      })
-      .on("mouseout", function() {
-        $(this).attr("class", "nextButton");
-      });
+  var showStatsFor = function(type) {
+    drawNumbers(drawableRanges[type]);
+    update(numericRanges[type], getSymbolFor(type));
   };
 
-  var showPrev = function(data) {
-    // clearInterval(refreshInterval);
-    redraw(getCurrentCase("prev"));
+  var initStatsCicle = function() {
+    setInterval(function() {
+      var c = getNextCase();
+      showStatsFor(c);
+    }, 5000);
   };
 
-  var showNext = function(data) {
-    // clearInterval(refreshInterval);
-    redraw(getCurrentCase("next"));
+  var getSymbolFor = function(type) {
+    switch (type) {
+      case "home":
+        return "\uf015";
+      case "lamp":
+        return '\uf0eb';
+      case "mobile":
+        return '\uf10b';
+      case "desktop":
+        return '\uf108';
+    }
   };
 
   var drawNumbers = function(range) {
     var numbers = svg.selectAll(".number")
-      .data(range, function(d, i) {
-        return d;
-      });
+      .data(range, function(d, i) { return d; });
 
     //UPDATE
     numbers.transition()
@@ -163,9 +130,7 @@ var StatisticsManager = function(wattsWasted) {
     // DATA JOIN
     // Join new data with old elements, if any.
     var text = svg.selectAll(".fa-symbol")
-      .data(data, function(d, i) {
-        return d;
-      });
+      .data(data, function(d, i) { return d; });
 
     // UPDATE
     // Update old elements as needed.
@@ -176,9 +141,7 @@ var StatisticsManager = function(wattsWasted) {
         return (i - maxItems * Math.floor(i / maxItems)) * 50;
       })
       .attr("font-family", "FontAwesome")
-      .text(function(d) {
-        return symbol;
-      });
+      .text(function(d) { return symbol; });
 
     // ENTER
     // Create new elements as needed.
@@ -189,8 +152,9 @@ var StatisticsManager = function(wattsWasted) {
       .attr("x", 0)
       .transition()
       .duration(750)
-      .text(function(d) {
-        return symbol;
+      .text(function(d) { return symbol; })
+      .attr("x", function(d, i) {
+        return  (i - maxItems * Math.floor(i / maxItems)) * 50;
       })
       .attr("y", function(d, i) {
         return Math.floor(i / maxItems) * 60;

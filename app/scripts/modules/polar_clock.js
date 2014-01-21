@@ -35,13 +35,13 @@ var PolarClock = function(scope) {
         second = data.seconds / 60,
         minute = data.minutes / 60,
         hour = data.hours / 24,
-        day = data.days / 99999;
+        day = data.days / 9999;
         // month = data.months / 12;
     return [
-      {value: second, index: 0.7, text: formatSecond(now)},
-      {value: minute, index: 0.6, text: formatMinute(now)},
-      {value: hour,   index: 0.5, text: formatHour(now)},
-      {value: day,    index: 0.3, text: formatDay(now)}
+      {value: second, index: 0.7, text: data.seconds  + "s" },
+      {value: minute, index: 0.6, text: data.minutes + "m" },
+      {value: hour,   index: 0.5, text: data.hours + "h" },
+      {value: day,    index: 0.3, text: data.days + "days" }
       // {value: month,  index: .1, text: formatMonth(now)}
     ];
   }

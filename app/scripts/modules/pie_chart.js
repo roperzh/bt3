@@ -1,13 +1,13 @@
 "use strict";
 
-var PieChart = function(el) {
+var PieChart = function(el, scope) {
   var currencies = [
     "ARS", "AUD", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR",
     "GBP", "HKD", "ILS", "INR", "JPY", "KRW", "LTC", "MXN", "NMC", "NOK", "NZD",
     "PLN", "RUB", "SEK", "SGD", "SLL", "THB", "USD", "XRP", "ZAR"
   ];
-  var width = 960;
-  var height = 700;
+  var width = 350;
+  var height = 350;
   var radius = Math.min(width, height) / 2;
   var svg;
 
@@ -65,7 +65,7 @@ var PieChart = function(el) {
           return d.children ? 1 : 1e-6;
         })
         .attr("class", function(d) {
-          return d.children ? "visible" : "hidden";
+          return d.children ? "visible" : "teste";
         })
         .on("click", click)
         .on("mouseenter", mouseenter);
@@ -82,6 +82,13 @@ var PieChart = function(el) {
       function click(d) {
         path.transition()
           .duration(750)
+          .attr("class", function(c) {
+            if (d.name === "flare" && !c.children) {
+              return "teste";
+            } else {
+              return "visible";
+            }
+          })
           .style("fill-opacity", function(c) {
             if (d.name === "flare" && !c.children) {
               return 1e-6;
