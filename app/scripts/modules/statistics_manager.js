@@ -2,7 +2,7 @@
 
 var StatisticsManager = function(wattsWasted, el, scope) {
 
-  var width         = scope.width - 150;
+  var width         = scope.width;
   var height        = scope.height - 350;
   var maxItems      = Math.floor(width / 70);
   var cases         = ["home", "lamp", "mobile", "desktop"];
@@ -26,7 +26,7 @@ var StatisticsManager = function(wattsWasted, el, scope) {
 
   var makeSvgArea = function() {
     svg = d3.select(el).append("svg")
-      .attr("width", width - 70)
+      .attr("width", width)
       .attr("height", height - 130)
       .append("g")
       .attr("transform", "translate(32," + (height / 2) + ")");
@@ -35,7 +35,7 @@ var StatisticsManager = function(wattsWasted, el, scope) {
   var setContent = function() {
     Object.keys(dataCases, function(name, type) {
       var range =  Math.ceil(wattsWasted / type.wattage) / 10000;
-      type.drawableRange = range.toString().split("");
+      type.message = range + "M"
       type.numericRange = Number.range(0, range).every();
     })
   };
@@ -53,7 +53,7 @@ var StatisticsManager = function(wattsWasted, el, scope) {
 
   var showStatsFor = function(type) {
     var currentCase = dataCases[type];
-    drawNumbers(currentCase.drawableRange);
+    drawNumbers(currentCase.message);
     update(currentCase.numericRange, currentCase.symbol);
   };
 
@@ -65,40 +65,25 @@ var StatisticsManager = function(wattsWasted, el, scope) {
   };
 
   var drawNumbers = function(range) {
-    var numbers = svg.selectAll(".number")
-      .data(range, function(d, i) { return d; });
+    var numbers = svg.selectAll(".message")
 
     //UPDATE
     numbers.transition()
-      .duration(500)
-      .attr("x", function(d, i) {
-        return width - 300 + (i * 32);
-      });
+      .duration(3500)
+      .attr("fill-opacity", 1e-6)
+      // .remove();
 
     //ENTER
-    numbers.enter().append("text")
-      .attr("x", function(d, i) {
-        return width - 300 + (i * 32);
-      })
+    svg.append("text")
+      .attr("x", 50)
       .attr("dy", ".35em")
-      .attr("y", -60)
-      .attr("class", "number")
-      .style("fill-opacity", 1e-6)
-      .text(function(d, i) {
-        return d;
-      })
-      .transition()
-      .duration(500)
+      .attr("class", "message")
       .attr("y", 0)
-      .style("fill-opacity", 1);
-
-    //EXIT
-    numbers.exit()
+      .attr("font-size", fontSize)
+      .text(range)
       .transition()
       .duration(500)
-      .attr("y", 60)
-      .style("fill-opacity", 1e-6)
-      .remove();
+      .style("fill-opacity", 1);
   };
 
   var update = function(data, symbol) {
